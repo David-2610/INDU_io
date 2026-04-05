@@ -11,12 +11,14 @@ const plans = [
     price: "$2,500",
     period: "one-time",
     desc: "Complete operational audit and custom AI automation blueprint.",
-    for: "Companies exploring where AI fits in their business.",
+    companySize: "Startups & Mid-Market",
+    timeline: "1-2 Weeks",
+    typicalROI: "Identifies $50k+ in savings",
     features: [
       "Full workflow mapping & bottleneck analysis",
       "Custom automation blueprint & architecture",
       "Calculated ROI projections",
-      "Tool & integration stack recommendations",
+      "Too & integration stack recommendations",
       "Executive presentation",
     ],
     cta: "Book Audit",
@@ -27,13 +29,15 @@ const plans = [
     price: "$15,000",
     period: "starting at",
     desc: "Design, build, and deploy one high-impact AI system.",
-    for: "Teams wanting to prove ROI before scaling.",
+    companySize: "Mid-Market & Enterprise",
+    timeline: "3-5 Weeks",
+    typicalROI: "Break-even in < 4 months",
     features: [
       "Everything in Strategy Audit",
-      "One full workflow or agent built & deployed",
-      "Seamless integration with 2 core tools",
+      "One full workflow or AI agent deployed",
+      "Seamless integration with up to 3 core tools",
       "1 month of monitoring & optimization",
-      "Team training & documentation",
+      "Team training & system documentation",
     ],
     cta: "Start Pilot",
     primary: true,
@@ -42,16 +46,18 @@ const plans = [
     name: "Enterprise Deployment",
     price: "Custom",
     period: "engagement",
-    desc: "Full organization-wide AI transformation and custom training.",
-    for: "Companies ready to operate as AI-first businesses.",
+    desc: "Full organization-wide autonomous AI transformation.",
+    companySize: "Enterprise & Global Teams",
+    timeline: "3-6+ Months",
+    typicalROI: "$500k+ Annual run-rate impact",
     features: [
-      "Multi-agent system architecture",
-      "Custom LLM fine-tuning & RAG on your data",
-      "Unlimited integrations",
-      "Dedicated engineering & support team",
-      "VPC deployment & enterprise SLA",
+      "Multi-agent intelligence architecture",
+      "Custom LLM fine-tuning & RAG on private data",
+      "Unlimited integrations & custom APIs",
+      "Dedicated engineering & support squad",
+      "VPC deployment & 99.99% enterprise SLA",
     ],
-    cta: "Contact Sales",
+    cta: "Contact Architecture Team",
     primary: false,
   },
 ];
@@ -140,9 +146,19 @@ export default function PricingPage() {
                   </span>
                 </div>
 
-                <div style={{ background: "rgba(255,255,255,0.03)", padding: "1rem", borderRadius: "8px", marginBottom: "2rem" }}>
-                  <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", display: "block", marginBottom: "0.25rem" }}>Best For:</span>
-                  <span className="body-sm" style={{ color: "var(--text-primary)" }}>{plan.for}</span>
+                <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-xl mb-8">
+                  <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                    <span className="text-xs font-mono text-white/50 uppercase tracking-wider">Company Fit</span>
+                    <span className="text-sm font-semibold text-white/90">{plan.companySize}</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                    <span className="text-xs font-mono text-white/50 uppercase tracking-wider">Timeline</span>
+                    <span className="text-sm font-semibold text-white/90">{plan.timeline}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-mono text-white/50 uppercase tracking-wider">Typical ROI</span>
+                    <span className="text-sm font-semibold text-[#22C55E]">{plan.typicalROI}</span>
+                  </div>
                 </div>
 
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "1rem", flex: 1, marginBottom: "2.5rem" }}>

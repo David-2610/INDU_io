@@ -53,7 +53,7 @@ export default function ArchitecturePage() {
 
       {/* System Diagram */}
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container" style={{ position: "relative" }}>
+        <div className="container" style={{ position: "relative", maxWidth: "800px" }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -62,64 +62,140 @@ export default function ArchitecturePage() {
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
               borderRadius: "20px",
-              padding: "3rem",
+              padding: "2.5rem",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
               position: "relative",
-              overflow: "hidden",
+              overflow: "hidden"
             }}
           >
-            <div className="bg-grid" style={{ position: "absolute", inset: 0, opacity: 0.2 }} />
+            <div className="bg-grid absolute inset-0 opacity-20 pointer-events-none" />
             
-            <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "2.5rem" }}>
-              {/* Layer 1 */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", color: "var(--text-muted)", width: "120px", flexShrink: 0 }}>01. CLIENT_INPUT</span>
-                <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-                  <div className="arch-node"><Globe size={14} color="var(--accent-blue)" /> Web Hooks</div>
-                  <div className="arch-node"><MessageSquare size={14} color="var(--accent-blue)" /> Chat Interfaces</div>
-                  <div className="arch-node"><Database size={14} color="var(--accent-blue)" /> DB Triggers</div>
-                  <div className="arch-node"><Mail size={14} color="var(--accent-blue)" /> Email Parsers</div>
-                </div>
-              </div>
+            <div className="relative z-10 flex flex-col">
+              {[
+                {
+                  id: 1,
+                  icon: Network,
+                  label: "01. Intake & Ingestion Layer",
+                  description: "Multi-channel data ingestion capturing user messages, system events, and raw NLP data.",
+                  detail: "Tools: Webhook Receivers · Natural Language Interpreters",
+                  color: "#3B82F6",
+                  dimColor: "rgba(59,130,246,0.1)",
+                },
+                {
+                  id: 2,
+                  icon: Layers,
+                  label: "02. Cognitive Intelligence Layer",
+                  description: "LLM Orchestration, semantic chunking, and Retrieval-Augmented Generation.",
+                  detail: "Tools: Context Engine (RAG) · Strategic Router",
+                  color: "#FF7A00",
+                  dimColor: "rgba(255,122,0,0.1)",
+                },
+                {
+                  id: 3,
+                  icon: Server,
+                  label: "03. Execution & Impact Layer",
+                  description: "Executing deterministic workflows, calling APIs, and persisting state changes.",
+                  detail: "Tools: Automated API Dispatches · Core Microservices",
+                  color: "#22C55E",
+                  dimColor: "rgba(34,197,94,0.1)",
+                }
+              ].map((step, i, arr) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.id}>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "1.5rem",
+                        alignItems: "flex-start",
+                        padding: "1.5rem",
+                        borderRadius: "16px",
+                        background: step.dimColor,
+                        border: `1px solid ${step.color}4D`,
+                        transition: "all 0.4s ease",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "56px",
+                          height: "56px",
+                          borderRadius: "14px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          background: step.dimColor,
+                          border: `1px solid ${step.color}66`,
+                        }}
+                      >
+                        <Icon size={24} color={step.color} />
+                      </div>
 
-              {/* Connector */}
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "2px", height: "40px", background: "linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-orange) 100%)", opacity: 0.5 }} />
-              </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                          <span
+                            style={{
+                              fontFamily: "var(--font-heading)",
+                              fontWeight: 700,
+                              fontSize: "1.25rem",
+                              color: step.color,
+                            }}
+                          >
+                            {step.label}
+                          </span>
+                          <span
+                            style={{
+                              fontFamily: "var(--font-mono)",
+                              fontSize: "0.75rem",
+                              color: step.color,
+                              padding: "0.25rem 0.75rem",
+                              background: step.dimColor,
+                              borderRadius: "100px",
+                              border: `1px solid ${step.color}33`,
+                              textTransform: "uppercase",
+                              letterSpacing: "0.05em",
+                            }}
+                          >
+                            Active
+                          </span>
+                        </div>
+                        <p style={{ fontSize: "1rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
+                          {step.description}
+                        </p>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: "0.875rem",
+                            color: step.color,
+                            background: step.dimColor,
+                            border: `1px solid ${step.color}33`,
+                            borderRadius: "8px",
+                            padding: "0.75rem 1rem",
+                          }}
+                        >
+                          → {step.detail}
+                        </div>
+                      </div>
+                    </div>
 
-              {/* Layer 2 */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", color: "var(--text-muted)", width: "120px", flexShrink: 0 }}>02. CORE_LOGIC</span>
-                <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-                  <div className="arch-node orange" style={{ borderColor: "var(--accent-orange-border)", background: "rgba(255,122,0,0.05)" }}>
-                    <Cpu size={14} color="var(--accent-orange)" /> LLM Orchestrator
+                    {/* Connector line */}
+                    {i < arr.length - 1 && (
+                      <div style={{ display: "flex", alignItems: "center", paddingLeft: "3.25rem", height: "40px" }}>
+                        <div
+                          style={{
+                            position: "relative",
+                            width: "2px",
+                            height: "100%",
+                            background: `linear-gradient(180deg, ${step.color}, ${arr[i+1]?.color})`,
+                            borderRadius: "1px",
+                            opacity: 0.6,
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <div className="arch-node orange" style={{ borderColor: "var(--accent-orange-border)", background: "rgba(255,122,0,0.05)" }}>
-                    <Layers size={14} color="var(--accent-orange)" /> Context Engine (RAG)
-                  </div>
-                  <div className="arch-node orange" style={{ borderColor: "var(--accent-orange-border)", background: "rgba(255,122,0,0.05)" }}>
-                    <Network size={14} color="var(--accent-orange)" /> Workflow Router
-                  </div>
-                </div>
-              </div>
-
-              {/* Connector */}
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "2px", height: "40px", background: "var(--accent-orange)", opacity: 0.5 }} />
-              </div>
-
-              {/* Layer 3 */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", color: "var(--text-muted)", width: "120px", flexShrink: 0 }}>03. EXECUTION</span>
-                <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-                  <div className="arch-node"><Plug size={14} color="#22C55E" /> 3rd-Party APIs</div>
-                  <div className="arch-node"><Server size={14} color="#22C55E" /> Internal Microservices</div>
-                  <div className="arch-node"><Database size={14} color="#22C55E" /> Data Warehouses</div>
-                </div>
-              </div>
-
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -152,12 +228,139 @@ export default function ArchitecturePage() {
           </div>
         </div>
       </section>
+
+      {/* Architecture in Production Case Study */}
+      <section className="section py-24 relative overflow-hidden bg-white/[0.01]">
+        <div className="container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={0}
+            >
+              <div className="section-label mb-6" style={{ display: "inline-flex" }}>Architecture in Production</div>
+              <h2 className="section-title text-start mb-8">
+                AgriHealth: <span className="gradient-text-blue">Global Logistics</span> at Scale
+              </h2>
+              <p className="body-lg mb-8 text-white/70">
+                INDU architecture transformed AgriHealth's manual 4-day audit process into a sub-second autonomous clearance engine, handling 12+ regional data streams simultaneously.
+              </p>
+
+              <div className="space-y-8 mb-10">
+                <div className="flex gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                    <Database size={22} className="text-[#3B82F6]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">Ingestion Layer</h4>
+                    <p className="text-sm text-white/50">Unified IoT sensors and 12 legacy regional databases into a 14ms real-time stream.</p>
+                  </div>
+                </div>
+                <div className="flex gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                    <Cpu size={22} className="text-[#FF7A00]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">Intelligence Layer</h4>
+                    <p className="text-sm text-white/50">LLM-based compliance verification replaced 4-day manual clearance cycles with 842ms LLM audits.</p>
+                  </div>
+                </div>
+                <div className="flex gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                    <Zap size={22} className="text-[#22C55E]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">Execution Layer</h4>
+                    <p className="text-sm text-white/50">Core microservices issue 40,000+ logistics clearance tokens per month directly to shipping APIs.</p>
+                  </div>
+                </div>
+              </div>
+
+              <Link href="/case-studies/agrihealth" className="btn btn-primary">
+                View AgriHealth Case Study <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={2}
+              className="relative"
+            >
+              <div className="absolute inset-0 bg-[#3B82F6] opacity-10 blur-[120px] -z-10" />
+              <div className="card-glow p-8 md:p-10">
+                <h3 className="text-2xl font-bold mb-8 font-heading">Infrastructure Impact</h3>
+                <div className="space-y-8">
+                  <div>
+                    <div className="flex justify-between text-xs font-mono mb-3">
+                      <span className="text-white/40 uppercase tracking-widest">Processing Latency</span>
+                      <span className="text-[#3B82F6] font-bold">-92%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "92%" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="h-full bg-[#3B82F6] shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs font-mono mb-3">
+                      <span className="text-white/40 uppercase tracking-widest">Manual Error Rate</span>
+                      <span className="text-[#FF7A00] font-bold">0%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="h-full bg-[#FF7A00] shadow-[0_0_15px_rgba(255,122,0,0.5)]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs font-mono mb-3">
+                      <span className="text-white/40 uppercase tracking-widest">System Throughput</span>
+                      <span className="text-[#22C55E] font-bold">4.2M actions/mo</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "85%" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="h-full bg-[#22C55E] shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 gap-6 font-heading">
+                   <div>
+                     <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1 font-mono">Architecture</div>
+                     <div className="text-sm font-bold text-white uppercase">VPC · Edge</div>
+                   </div>
+                   <div>
+                     <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1 font-mono">Status</div>
+                     <div className="text-sm font-bold text-[#22C55E] flex items-center gap-2">
+                       <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
+                       Production Live
+                     </div>
+                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
 
-// Temporary internal lucide imports for the diagram
-function Globe(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> }
-function MessageSquare(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> }
-function Mail(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> }
-function Plug(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg> }
+function Globe(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> }
+function MessageSquare(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> }
+function Plug(props: any) { return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg> }

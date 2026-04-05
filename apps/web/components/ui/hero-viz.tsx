@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 
 const nodes = [
-  { id: "input", x: 50, y: 50, label: "Input", color: "#3B82F6" },
-  { id: "ai", x: 200, y: 30, label: "AI Agent", color: "#FF7A00" },
-  { id: "process", x: 200, y: 110, label: "Process", color: "#8B5CF6" },
-  { id: "decide", x: 350, y: 50, label: "Decision", color: "#FF7A00" },
-  { id: "output1", x: 480, y: 20, label: "CRM Sync", color: "#22C55E" },
-  { id: "output2", x: 480, y: 80, label: "Auto-Email", color: "#22C55E" },
-  { id: "output3", x: 480, y: 140, label: "Dashboard", color: "#3B82F6" },
+  { id: "input", x: 50, y: 50, label: "Input", color: "#3B82F6", tooltip: "Data Ingestion Pipeline (API/Webhooks)" },
+  { id: "ai", x: 200, y: 30, label: "AI Agent", color: "#FF7A00", tooltip: "Semantic Logic Engine & Routing" },
+  { id: "process", x: 200, y: 110, label: "Process", color: "#8B5CF6", tooltip: "Data Transformation & Structuring" },
+  { id: "decide", x: 350, y: 50, label: "Decision", color: "#FF7A00", tooltip: "Autonomous Rule Evaluation" },
+  { id: "output1", x: 480, y: 20, label: "CRM Sync", color: "#22C55E", tooltip: "Salesforce / HubSpot Native Push" },
+  { id: "output2", x: 480, y: 80, label: "Auto-Email", color: "#22C55E", tooltip: "Personalized Outreach Trigger" },
+  { id: "output3", x: 480, y: 140, label: "Dashboard", color: "#3B82F6", tooltip: "Real-time Metrics Update" },
 ];
 
 const edges = [
@@ -29,6 +29,7 @@ function getNode(id: string) {
 export function HeroViz() {
   const [activeEdge, setActiveEdge] = useState(0);
   const [pulseNode, setPulseNode] = useState("");
+  const [hoverNode, setHoverNode] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,17 +76,13 @@ export function HeroViz() {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF7A00" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#FF7A00" stopOpacity="0.1" />
-          </linearGradient>
         </defs>
 
         {/* Edges */}
         {edges.map((edge, i) => {
           const from = getNode(edge.from);
           const to = getNode(edge.to);
-          const isActive = activeEdge === i;
+          const isActive = activeEdge === i || hoverNode === edge.from || hoverNode === edge.to;
           return (
             <g key={`${edge.from}-${edge.to}`}>
               <line
@@ -95,14 +92,14 @@ export function HeroViz() {
                 y2={to.y + 16}
                 stroke={isActive ? "#FF7A00" : "rgba(255,255,255,0.06)"}
                 strokeWidth={isActive ? 2 : 1}
-                strokeDasharray={isActive ? "none" : "4 4"}
-                filter={isActive ? "url(#glow-orange)" : undefined}
+                strokeDasharray={(activeEdge === i) ? "none" : "4 4"}
+                filter={(activeEdge === i) ? "url(#glow-orange)" : undefined}
                 style={{
                   transition: "all 0.4s ease",
                 }}
               />
               {/* Traveling dot */}
-              {isActive && (
+              {activeEdge === i && (
                 <circle r="3" fill="#FF7A00" filter="url(#glow-dot)">
                   <animateMotion
                     dur="0.8s"
@@ -117,9 +114,16 @@ export function HeroViz() {
 
         {/* Nodes */}
         {nodes.map((node) => {
-          const isPulsing = pulseNode === node.id;
+          const isPulsing = pulseNode === node.id || hoverNode === node.id;
           return (
-            <g key={node.id}>
+            <g 
+              key={node.id} 
+              onMouseEnter={() => setHoverNode(node.id)} 
+              onMouseLeave={() => setHoverNode("")}
+              style={{ cursor: "pointer" }}
+            >
+              <title>{node.tooltip}</title>
+              
               {/* Pulse ring */}
               {isPulsing && (
                 <rect

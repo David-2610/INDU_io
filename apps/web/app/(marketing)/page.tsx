@@ -29,7 +29,8 @@ import {
 import { HeroViz } from "@/components/ui/hero-viz";
 import { LiveSystemPreview } from "@/components/ui/live-system-preview";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
-
+import { caseStudies } from "../../data/case-studies";
+import Image from "next/image";
 /* ── Animation helpers ──────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -145,32 +146,7 @@ const integrations = [
   "Twilio", "Intercom", "Jira", "GitHub", "PostgreSQL", "MongoDB",
 ];
 
-const caseStudies = [
-  {
-    client: "SaaS Company",
-    problem: "60+ hours/week on manual lead qualification",
-    system: "AI Sales Agent + CRM Automation",
-    result: "72% reduction in manual work",
-    metric: "72%",
-    color: "#FF7A00",
-  },
-  {
-    client: "E-commerce Brand",
-    problem: "Support team overwhelmed with 2000+ tickets/day",
-    system: "AI Support Agent + Smart Routing",
-    result: "58% tickets auto-resolved",
-    metric: "58%",
-    color: "#3B82F6",
-  },
-  {
-    client: "Financial Services",
-    problem: "Compliance workflows taking 5 days per case",
-    system: "Workflow Automation + Decision Engine",
-    result: "Processing reduced to 4 hours",
-    metric: "96%",
-    color: "#22C55E",
-  },
-];
+
 
 const trustSignals = [
   { icon: Shield, title: "Enterprise Security", desc: "SOC 2 Type II compliant infrastructure with end-to-end encryption at rest and in transit." },
@@ -716,103 +692,7 @@ export default function HomePage() {
       </motion.section>
 
       {/* ═══════════════════════════════════════════════════
-          CASE STUDY HIGHLIGHTS
-         ═══════════════════════════════════════════════════ */}
-      <motion.section
-        className="section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={stagger}
-      >
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: "4rem" }}>
-            <motion.div variants={fadeUp} custom={0}>
-              <div className="section-label" style={{ display: "inline-flex" }}>Results</div>
-            </motion.div>
-            <motion.h2 className="section-title" variants={fadeUp} custom={1}>
-              Measurable outcomes, <span className="gradient-text">every deployment</span>
-            </motion.h2>
-          </div>
-
-          <div className="grid-3">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.client}
-                variants={fadeUp}
-                custom={i + 2}
-                className="card"
-              >
-                <span className="badge badge-orange" style={{ marginBottom: "1rem", display: "inline-flex" }}>
-                  {cs.client}
-                </span>
-                <div
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "3rem",
-                    fontWeight: 800,
-                    letterSpacing: "-0.04em",
-                    color: cs.color,
-                    lineHeight: 1,
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  {cs.metric}
-                </div>
-                <p
-                  style={{
-                    fontSize: "0.9375rem",
-                    color: "#fff",
-                    fontWeight: 600,
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {cs.result}
-                </p>
-                <div
-                  style={{
-                    borderTop: "1px solid var(--border)",
-                    paddingTop: "1rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.375rem",
-                  }}
-                >
-                  <p className="body-sm">
-                    <strong style={{ color: "var(--text-secondary)" }}>Challenge:</strong> {cs.problem}
-                  </p>
-                  <p className="body-sm">
-                    <strong style={{ color: "var(--text-secondary)" }}>System:</strong> {cs.system}
-                  </p>
-                </div>
-                <Link
-                  href="/case-studies"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.375rem",
-                    marginTop: "1.25rem",
-                    fontSize: "0.875rem",
-                    fontWeight: 600,
-                    color: "var(--accent-orange)",
-                  }}
-                >
-                  Read full case study <ArrowUpRight size={14} />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center" style={{ marginTop: "3rem" }}>
-            <Link href="/case-studies" className="btn btn-secondary">
-              View All Case Studies <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ═══════════════════════════════════════════════════
-          BEFORE / AFTER
+          TRANSFORMATION ENGINE
          ═══════════════════════════════════════════════════ */}
       <motion.section
         className="section"
@@ -825,7 +705,7 @@ export default function HomePage() {
         <div className="container">
           <div className="text-center" style={{ marginBottom: "4rem" }}>
             <motion.div variants={fadeUp} custom={0}>
-              <div className="section-label" style={{ display: "inline-flex" }}>Transformation</div>
+              <div className="section-label" style={{ display: "inline-flex" }}>Transformation Engine</div>
             </motion.div>
             <motion.h2 className="section-title" variants={fadeUp} custom={1}>
               Before INDU vs <span className="gradient-text">after INDU</span>
@@ -867,6 +747,76 @@ export default function HomePage() {
               </tbody>
             </table>
           </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════
+          REAL SYSTEMS DEPLOYED
+         ═══════════════════════════════════════════════════ */}
+      <motion.section
+        className="section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <div className="container">
+          <div className="text-center" style={{ marginBottom: "4rem" }}>
+            <motion.div variants={fadeUp} custom={0}>
+              <div className="section-label" style={{ display: "inline-flex" }}>Proven Architectures</div>
+            </motion.div>
+            <motion.h2 className="section-title" variants={fadeUp} custom={1}>
+              Real deployed <span className="gradient-text">production systems</span>
+            </motion.h2>
+          </div>
+
+          <div className="grid-3">
+            {caseStudies.slice(0, 3).map((cs, i) => (
+              <motion.div
+                key={cs.slug}
+                variants={fadeUp}
+                custom={i + 2}
+                className="card"
+                style={{ display: "flex", flexDirection: "column", padding: 0, overflow: "hidden" }}
+              >
+                {/* Preview Image */}
+                <div style={{ position: "relative", width: "100%", aspectRatio: "4/3", backgroundColor: "rgba(0,0,0,0.5)", borderBottom: "1px solid var(--border)" }}>
+                  <Image
+                    src={cs.images[0] || ''}
+                    alt={cs.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    style={{ objectFit: "cover" }}
+                    className="case-study-img"
+                  />
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6rem", background: "linear-gradient(to top, var(--bg-card), transparent)" }} />
+                  <div style={{ position: "absolute", top: "1rem", left: "1rem", display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.25rem 0.75rem", borderRadius: "100px", background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", border: "1px solid var(--border)" }}>
+                    <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#22C55E" }} />
+                    <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", fontWeight: 500, color: "rgba(255,255,255,0.9)", textTransform: "uppercase", letterSpacing: "0.05em" }}>{cs.category}</span>
+                  </div>
+                </div>
+
+                <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <h3 className="card-title" style={{ marginBottom: "0.5rem" }}>{cs.title}</h3>
+                  <div style={{ marginTop: "1rem", paddingBottom: "1.5rem", borderBottom: "1px solid var(--border)", marginBottom: "1.5rem", flex: 1 }}>
+                    <div style={{ fontSize: "1.5rem", fontWeight: 700, fontFamily: "var(--font-heading)", color: "var(--accent-orange)" }}>{cs.results[0]?.value || ''}</div>
+                    <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-mono)" }}>{cs.results[0]?.label || ''}</div>
+                  </div>
+                  
+                  <Link href={`/case-studies/${cs.slug}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "var(--accent-blue)", fontWeight: 500, fontFamily: "var(--font-mono)", fontSize: "0.875rem" }}>
+                    <span>View System Details</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link href="/case-studies" className="btn btn-secondary">
+              View All Deployed Systems <ArrowRight size={14} className="ml-2"/>
+            </Link>
+          </div>
         </div>
       </motion.section>
 
