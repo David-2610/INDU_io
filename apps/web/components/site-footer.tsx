@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Zap, ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 function TwitterIcon(props: any) {
   return (
@@ -77,29 +77,13 @@ export function SiteFooter() {
             >
               <div
                 style={{
-                  width: "32px",
-                  height: "32px",
-                  borderRadius: "8px",
-                  background: "linear-gradient(135deg, #FF7A00, #FF9A3C)",
+                  height: "36px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 0 20px rgba(255,122,0,0.3)",
                 }}
               >
-                <Zap size={18} fill="white" color="white" />
+                <img src="/horizontalwithname.png" alt="INDU.IO Logo" style={{ height: "100%", width: "auto", objectFit: "contain", borderRadius: "6px" }} />
               </div>
-              <span
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontWeight: 800,
-                  fontSize: "1.25rem",
-                  letterSpacing: "-0.03em",
-                  color: "#F8FAFC",
-                }}
-              >
-                INDU
-              </span>
             </Link>
             <p
               style={{
@@ -238,7 +222,7 @@ export function SiteFooter() {
           }}
         >
           <p style={{ color: "#536179", fontSize: "0.8125rem" }}>
-            © 2025 INDU — Intelligent Digital Universe. All rights reserved.
+            © 2025 INDU.IO — Intelligent Digital Universe. All rights reserved.
           </p>
           <div style={{ display: "flex", gap: "1.5rem" }}>
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (

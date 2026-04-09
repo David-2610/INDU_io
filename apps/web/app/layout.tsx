@@ -15,16 +15,16 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://indu.io"),
+  metadataBase: new URL("https://indu.life"),
   alternates: {
     canonical: '/',
   },
   title: {
-    default: "INDU — Deploy AI Systems That Run Your Business",
-    template: "%s | INDU",
+    default: "INDU.IO — Deploy AI Systems That Run Your Business",
+    template: "%s | INDU.IO",
   },
   description:
-    "INDU deploys intelligent AI systems, autonomous agents, and automated workflows that replace manual work, optimize operations, and scale your business. Enterprise-grade AI infrastructure.",
+    "INDU.IO deploys intelligent AI systems, autonomous agents, and automated workflows that replace manual work, optimize operations, and scale your business. Enterprise-grade AI infrastructure.",
   keywords: [
     "AI automation",
     "AI agents",
@@ -33,22 +33,25 @@ export const metadata: Metadata = {
     "business automation",
     "AI systems",
     "intelligent automation",
-    "INDU",
+    "INDU.IO",
   ],
-  authors: [{ name: "INDU" }],
-  creator: "INDU",
+  authors: [{ name: "INDU.IO" }],
+  creator: "INDU.IO",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://indu.io",
-    siteName: "INDU",
-    title: "INDU — Deploy AI Systems That Run Your Business",
+    url: "https://indu.life",
+    siteName: "INDU.IO",
+    title: "INDU.IO — Deploy AI Systems That Run Your Business",
     description:
       "Automate workflows, deploy AI agents, and scale operations intelligently. Enterprise-grade AI infrastructure for modern businesses.",
   },
+  icons: {
+    icon: '/LOGO.png',
+  },
   twitter: {
     card: "summary_large_image",
-    title: "INDU — Deploy AI Systems That Run Your Business",
+    title: "INDU.IO — Deploy AI Systems That Run Your Business",
     description:
       "Automate workflows, deploy AI agents, and scale operations intelligently.",
   },
@@ -99,10 +102,10 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": "https://indu.io/#organization",
-                  "name": "INDU",
-                  "url": "https://indu.io",
-                  "logo": "https://indu.io/turborepo-dark.svg",
+                  "@id": "https://indu.life/#organization",
+                  "name": "INDU.IO",
+                  "url": "https://indu.life",
+                  "logo": "https://indu.life/LOGO.png",
                   "sameAs": [
                     "https://twitter.com/indu_io",
                     "https://linkedin.com/company/indu-io",
@@ -111,15 +114,15 @@ export default function RootLayout({
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://indu.io/#website",
-                  "url": "https://indu.io",
-                  "name": "INDU",
+                  "@id": "https://indu.life/#website",
+                  "url": "https://indu.life",
+                  "name": "INDU.IO",
                   "publisher": {
-                    "@id": "https://indu.io/#organization"
+                    "@id": "https://indu.life/#organization"
                   },
                   "potentialAction": {
                     "@type": "SearchAction",
-                    "target": "https://indu.io/search?q={search_term_string}",
+                    "target": "https://indu.life/search?q={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
                 }
@@ -128,7 +131,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

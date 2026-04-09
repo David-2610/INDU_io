@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       },
     ],
-    sitemap: 'https://indu.io/sitemap.xml',
-    host: 'https://indu.io',
+    sitemap: 'https://indu.life/sitemap.xml',
+    host: 'https://indu.life',
   };
 }

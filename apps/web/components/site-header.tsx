@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, Menu, ChevronDown, ArrowRight, Zap, Sun, Moon } from "lucide-react";
+import { X, Menu, ChevronDown, ArrowRight, Sun, Moon } from "lucide-react";
 import { useThemeContext } from "@/components/theme-provider";
 
 const navItems = [
@@ -79,29 +79,13 @@ export function SiteHeader() {
           >
             <div
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "8px",
-                background: "linear-gradient(135deg, var(--accent-orange), var(--accent-orange-glow))",
+                height: "36px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "var(--logo-glow)",
               }}
             >
-              <Zap size={18} fill="white" color="white" />
+              <img src="/horizontalwithname.png" alt="INDU.IO Logo" style={{ height: "100%", width: "auto", objectFit: "contain", borderRadius: "6px" }} />
             </div>
-            <span
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "1.25rem",
-                letterSpacing: "-0.03em",
-                color: "var(--text-primary)",
-              }}
-            >
-              INDU
-            </span>
           </Link>
 
           {/* Desktop Nav */}
